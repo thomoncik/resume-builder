@@ -3,3 +3,7 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password: passowrd
+
+java:
+  runtime:
+    version: 11
