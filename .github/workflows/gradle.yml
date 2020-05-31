@@ -12,12 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Gradle Command
+      uses: eskatos/gradle-command-action@v1
+#       with:
+        # Path to the Gradle Wrapper directory
+#         wrapper-directory: # optional
+        # Path to the Gradle executable
+#         gradle-executable: # optional
+        # Gradle version to use
+#         gradle-version: # optional
+        # Path to the root directory of the build
+#         build-root-directory: # optional
+        # Gradle command line arguments, see gradle --help
+#         arguments: # optional
