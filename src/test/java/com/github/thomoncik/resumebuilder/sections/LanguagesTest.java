@@ -71,6 +71,7 @@ class LanguagesTest {
                 "\\end{tabular}\n" +
                 ending(), languages.process().toString());
     }
+    // TODO process to new env
 
     private String beginning() {
         return "\\begin{cvsection}{Languages}\n\n";
