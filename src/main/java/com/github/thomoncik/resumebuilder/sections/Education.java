@@ -30,17 +30,24 @@ public class Education implements Section {
         return string == null || string.isEmpty() || string.isBlank() ? "" : string;
     }
 
+
     private StringBuilder processUniversity(University university) {
         StringBuilder result = new StringBuilder();
-        result.append("\\begin{EDUCATION}{" + university.name + "}");
-        result.append("{" + processDate(university.startDate, university.endDate) + "}");
-        result.append("{" + resolveEmpty(university.degree) + "}");
-        result.append("{" + resolveEmpty(university.location) + "}\n");
+        result.append("\\begin{EDUCATION}{").append(university.name).append("}");
+        result.append("{").append(processDate(university.startDate, university.endDate)).append("}");
+        result.append("{").append(resolveEmpty(university.degree)).append("}");
+        result.append("{").append(resolveEmpty(university.location)).append("}\n");
+        result.append(processDescription(university));
+        result.append("\\end{EDUCATION}\n\n");
+        return result;
+    }
+
+    private StringBuilder processDescription(University university) {
+        StringBuilder result = new StringBuilder();
         String[] lines = university.description.split("\n");
         for (String line : lines) {
-            result.append("\\item " + line + "\n");
+            result.append("\\item ").append(line).append("\n");
         }
-        result.append("\\end{EDUCATION}\n\n");
         return result;
     }
 
