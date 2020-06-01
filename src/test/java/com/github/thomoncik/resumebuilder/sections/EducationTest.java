@@ -26,12 +26,19 @@ class EducationTest {
         ArrayList<Education.University> universities = new ArrayList<>();
         universities.add(university);
         Education education = new Education(universities);
-        assertEquals("\\begin{cvsection}{Education}\n\n" +
+        assertEquals(beginning() +
                 "\\begin{EDUCATION}{}{}{}{}\n" +
                 "\\end{EDUCATION}\n\n" +
-                "\\end{cvsection}", education.process());
+                ending(), education.process().toString());
     }
 
+    private String beginning(){
+        return "\\begin{cvsection}{Education}\n\n";
+    }
+
+    private String ending(){
+        return "\\end{cvsection}\n\n";
+    }
     // TODO add more
 
 }

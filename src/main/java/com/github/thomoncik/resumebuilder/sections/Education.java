@@ -23,6 +23,7 @@ public class Education implements Section {
     private String processDate(String start, String end) {
         if (start == null || start.isBlank()) return "";
         if (end == null || end.isBlank()) return start;
+        if (start.equals(end)) return start;
         return start + " - " + end;
     }
 
@@ -33,7 +34,7 @@ public class Education implements Section {
 
     private StringBuilder processUniversity(University university) {
         StringBuilder result = new StringBuilder();
-        result.append("\\begin{EDUCATION}{").append(university.name).append("}");
+        result.append("\\begin{EDUCATION}{").append(resolveEmpty(university.name)).append("}");
         result.append("{").append(processDate(university.startDate, university.endDate)).append("}");
         result.append("{").append(resolveEmpty(university.degree)).append("}");
         result.append("{").append(resolveEmpty(university.location)).append("}\n");
