@@ -102,19 +102,7 @@ class WorkExperienceTest {
         return "\\end{cvsection}\n\n";
     }
 
-
-
-//
-//    @Test
-//    void processAllNull() {
-//        Education.University university = new Education.University();
-//        ArrayList<Education.University> universities = new ArrayList<>();
-//        universities.add(university);
-//        Education education = new Education(universities);
-//        assertEquals("\\begin{cvsection}{Education}\n\n" +
-//                "\\begin{EDUCATION}{}{}{}{}\n" +
-//                "\\end{EDUCATION}\n\n" +
-//                "\\end{cvsection}", education.process());
-//    }
+    // TODO add more
+    // TODO add separate string parser
 
 }
