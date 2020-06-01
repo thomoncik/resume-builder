@@ -44,6 +44,9 @@ public class Education implements Section {
 
     private StringBuilder processDescription(University university) {
         StringBuilder result = new StringBuilder();
+        if (university.description == null || university.description.isBlank()){
+            return new StringBuilder();
+        }
         String[] lines = university.description.split("\n");
         for (String line : lines) {
             result.append("\\item ").append(line).append("\n");
