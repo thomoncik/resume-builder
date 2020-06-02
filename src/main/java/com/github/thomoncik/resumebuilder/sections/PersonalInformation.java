@@ -4,21 +4,15 @@ import java.util.ArrayList;
 
 public class PersonalInformation implements Section {
 
-    final private ArrayList<Website> websites;
     final private Summary summary;
     final private Details details;
 
-    public PersonalInformation(ArrayList<Website> websites, Summary summary, Details details) {
-        this.websites = websites;
+    public PersonalInformation(Summary summary, Details details) {
         this.summary = summary;
         this.details = details;
     }
 
 
-    public static class Website {
-        public String label;
-        public String link;
-    }
 
     public static class Summary {
         public String description;
@@ -42,6 +36,7 @@ public class PersonalInformation implements Section {
 
     @Override
     public StringBuilder process() {
+
         // TODO generate
         return null;
     }
