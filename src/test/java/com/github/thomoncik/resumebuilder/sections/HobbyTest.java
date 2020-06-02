@@ -17,7 +17,7 @@ class HobbyTest {
         Hobby hobby = new Hobby("");
         assertEquals("\\begin{cvsection}{Hobby}\n"
                 + "\n"
-                + "\\end{cvsection}", hobby.process().toString());
+                + "\\end{cvsection}\n\n", hobby.process().toString());
     }
 
     @Test
@@ -25,6 +25,6 @@ class HobbyTest {
         Hobby hobby = new Hobby("description");
         assertEquals("\\begin{cvsection}{Hobby}\n"
                 + "description\n"
-                + "\\end{cvsection}", hobby.process().toString());
+                + "\\end{cvsection}\n\n", hobby.process().toString());
     }
 }

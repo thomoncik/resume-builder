@@ -1,5 +1,3 @@
-
-
 \ProvidesClass{resume}[2010/07/10 v0.9 Resume class]
 
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
@@ -8,105 +6,46 @@
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
 \usepackage{tikz}
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
 
 
 \pagestyle{empty} % Suppress page numbers
 
-%----------------------------------------------------------------------------------------
-%	HEADINGS COMMANDS: Commands for printing name and address
-%----------------------------------------------------------------------------------------
-
-\def \name#1{\def\@name{#1}} % Defines the \name command to set name
-\def \@name {} % Sets \@name to empty by default
-
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
-
-% One, two or three address lines can be specified
-\let \@addressone \relax
-\let \@addresstwo \relax
-\let \@addressthree \relax
-
-% \address command can be used to set the first, second, and third address (last 2 optional)
-\def \address #1{
-  \@ifundefined{@addresstwo}{
-    \def \@addresstwo {#1}
-  }{
-  \@ifundefined{@addressthree}{
-  \def \@addressthree {#1}
-  }{
-     \def \@addressone {#1}
-  }}
+\newenvironment{NAME}[2]{
+     \begin{center}
+         \MakeUppercase{\huge\bf #1}  \MakeUppercase{\huge\bf #2}
+     \end{center}
 }
 
-% \printaddress is used to style an address line (given as input)
-\def \printaddress #1{
-  \begingroup
-    \def \\ {\addressSep\ }
-    \centerline{#1}
-  \endgroup
-  \par
-  \addressskip
+\newenvironment{INFO}[3]{
+    \begin{center}
+         { #1} \textbar \MakeUppercase{ #2} \textbar \MakeUppercase{ #3}
+    \end{center}
 }
 
-% \printname is used to print the name as a page header
-\def \printname {
-  \begingroup
-    \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
-    \nameskip\break
-  \endgroup
+\newenvironment{SUMMARY}[1]{
+         { #1}
 }
 
-%----------------------------------------------------------------------------------------
-%	PRINT THE HEADING LINES
-%----------------------------------------------------------------------------------------
-
-\let\ori@document=\document
-\renewcommand{\document}{
-  \ori@document  % Begin document
-  \printname % Print the name specified with \name
-  \@ifundefined{@addressone}{}{ % Print the first address if specified
-    \printaddress{\@addressone}}
-  \@ifundefined{@addresstwo}{}{ % Print the second address if specified
-    \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
-    \printaddress{\@addressthree}}
+\newenvironment{DETAILS}[6]{
+    \begin{center}
+         { #1}, { #2}, { #3}, { #4}\\
+         { #5} \textbar { #6}
+    \end{center}
 }
 
-%----------------------------------------------------------------------------------------
-%	SECTION FORMATTING
-%----------------------------------------------------------------------------------------
-
-% Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
-  }
-  \item[]
-}{
-  \end{list}
+\newenvironment{BIRTH}[2]{
+    \ifthenelse{\equal{#1}{}}{}{Date of birth: {#1}} \hfill
+    \ifthenelse{\equal{#2}{}}{}{Place of birth: {#2}}
 }
 
-%----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
-%----------------------------------------------------------------------------------------
-
-\newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
-  \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  }{
-  \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
+\newenvironment{NATIONALITY}[1]{
+    \ifthenelse{\equal{#1}{}}{}{Nationality: {#1}}
 }
 
+\newenvironment{DRIVING}[1]{
+    \ifthenelse{\equal{#1}{}}{}{Driving licence: {#1}}
+}
 
 \newenvironment{EDUCATION}[4]{ % 4 input arguments - uni name, year(s), degree  and location
  {\bf #1} \hfill {#2} % Bold company name and date on the right
@@ -150,7 +89,7 @@
 
 \newenvironment{REFERENCE}[4]{ % 4 input arguments - uni name, year(s), degree  and location
  {\bf #1} from {\bf #2} \\ % Bold company name and date on the right
- { #3}  { #4} % Your phone number and email
+ { #3} \textbar { #4} % Your phone number and email
 
   \smallskip
 }
@@ -195,6 +134,11 @@
 \newcommand{\itemmarker}{{\small\textbullet}}
 \newcommand{\ratingmarker}{\faCircle}
 
+\newcommand{\cvlink}[2]{%
+\textbf{#1} \hfil {#2}\\
+}
+
+
 \newcommand{\cvskill}[2]{%
 \textbf{#1} \hfill
 \begin{tikzpicture}
@@ -227,21 +171,13 @@
        \fill (4,0) circle (0.1cm);
        \fill (5,0) circle (0.1cm);
     }{}
-    % \foreach \y in {1,2,3,4,5}
-    %   {
-    %     \draw (\y,0) circle (0.2cm);
-    %     % \ifthenelse{\equal{#2}{4}}{}{
-    %     %             \fill (\y,0) circle (0.1cm);
-
-    %     % }
-    %   }
 \end{tikzpicture}
 }
 
 \newenvironment{cvsection}[1]{ % 1 input argument - section name
-  \sectionskip
+  \medskip
   \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
+  \medskip
   \hrule % Horizontal line
   \begin{list}{}{ % List for each individual item in the section
     \setlength{\leftmargin}{1.5em} % Margin within the section
@@ -250,10 +186,3 @@
 }{
   \end{list}
 }
-
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\huge} % Size of the name at the top of the document
-\def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
-\def\nameskip{\bigskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section

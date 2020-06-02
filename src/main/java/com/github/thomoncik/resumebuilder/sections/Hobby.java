@@ -16,7 +16,7 @@ public class Hobby implements Section {
         StringBuilder result = new StringBuilder();
         result.append("\\begin{cvsection}{Hobby}\n")
                 .append(description).append("\n")
-                .append("\\end{cvsection}");
+                .append("\\end{cvsection}\n\n");
         return result;
     }
 }
