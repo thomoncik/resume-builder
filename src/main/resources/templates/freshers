@@ -1,192 +1,183 @@
-\ProvidesClass{resume}[2010/07/10 v0.9 Resume class]
-
-\LoadClass[11pt,letterpaper]{article} % Font size and paper type
-
-\usepackage[parfill]{parskip} % Remove paragraph indentation
-\usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
-\usepackage{ifthen} % Required for ifthenelse statements
-\usepackage{tikz}
-
-
-\pagestyle{empty} % Suppress page numbers
-
 %----------------------------------------------------------------------------------------
-%	HEADINGS COMMANDS: Commands for printing name and address
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\def \name#1{\def\@name{#1}} % Defines the \name command to set name
-\def \@name {} % Sets \@name to empty by default
+\documentclass{resume} % Use the custom resume.cls style
 
-\def \addressSep {$\diamond$} % Set default address separator to a diamond
-
-% One, two or three address lines can be specified
-\let \@addressone \relax
-\let \@addresstwo \relax
-\let \@addressthree \relax
-
-% \address command can be used to set the first, second, and third address (last 2 optional)
-\def \address #1{
-  \@ifundefined{@addresstwo}{
-    \def \@addresstwo {#1}
-  }{
-  \@ifundefined{@addressthree}{
-  \def \@addressthree {#1}
-  }{
-     \def \@addressone {#1}
-  }}
-}
-
-% \printaddress is used to style an address line (given as input)
-\def \printaddress #1{
-  \begingroup
-    \def \\ {\addressSep\ }
-    \centerline{#1}
-  \endgroup
-  \par
-  \addressskip
-}
-
-% \printname is used to print the name as a page header
-\def \printname {
-  \begingroup
-    \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
-    \nameskip\break
-  \endgroup
-}
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Yuliia Buchko} % Your name
+\address{Bydgoska 19C/227 \\ Krak\'{o}w, 30-056} % Your address
+%\address{123 Pleasant Lane \\ City, State 12345} % Your secondary addess (optional)
+\address{(+48)~881~293~359 \\ yuliiabuchko@gmail.com} % Your phone number and email
+\begin{document}
 
 %----------------------------------------------------------------------------------------
-%	PRINT THE HEADING LINES
+%	EDUCATION SECTION
 %----------------------------------------------------------------------------------------
 
-\let\ori@document=\document
-\renewcommand{\document}{
-  \ori@document  % Begin document
-  \printname % Print the name specified with \name
-  \@ifundefined{@addressone}{}{ % Print the first address if specified
-    \printaddress{\@addressone}}
-  \@ifundefined{@addresstwo}{}{ % Print the second address if specified
-    \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
-    \printaddress{\@addressthree}}
-}
+\begin{rSection}{Education}
 
-%----------------------------------------------------------------------------------------
-%	SECTION FORMATTING
-%----------------------------------------------------------------------------------------
+{\bf Jagiellonian University} \hfill {July 2017 - Present}
+\\ Computer Science, II year \hfill { Overall GPA: 4.2/5}
+\\ Bachelor, Full-time
+\\ Department of Mathematics and Computer Science
+%Minor in Linguistics \smallskip \\
+%Member of Eta Kappa Nu \\
+%Member of Upsilon Pi Epsilon \\
 
-% Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
-  }
-  \item[]
-}{
-  \end{list}
-}
 
+\end{rSection}
 %----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
+%	TECHNICAL STRENGTHS SECTION
 %----------------------------------------------------------------------------------------
 
-\newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
-  \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  }{
-  \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
-}
+\begin{rSection}{Technical Skills}
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Computer Languages &  Python, C/C++, Java \\
+Databases & MySQL, PostgreSQL\\
+Software \& Tools & Git, LaTeX  \\
+Platforms & Linux, Windows\\
+\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{cvsection}{Education}
+
+\begin{EDUCATION}{Uniwersytet Jagiellonski}{Oct 2017 - Present}{Bachelor degree}{Krakow, Poland}
+\item chce skonczyc i mam dosc tego
+\item plak plak
+\end{EDUCATION}
+
+\begin{EDUCATION}{Uniwersytet inny}{Oct 2020 - 2022}{Master degree}{Krakow, Poland}
+\item chce skonczyc i mam dosc tego
+\item plak plak jeszcze bardziej
+\end{EDUCATION}
 
 
-\newenvironment{EDUCATION}[4]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
-  \\
-  {\em #3} \hfill {\em #4} % Italic degree and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  }{
-  \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
-}
+\end{cvsection}
+
+\begin{cvsection}{Courses}
+
+\begin{COURSE}{Super kurs bycia grzecznym rekinem}{June 2020}{IKEA}
+\end{COURSE}
+
+\begin{COURSE}{Super kurs bycia grzecznym rekinem}{June 2020}{IKEA}
+\end{COURSE}
+
+\begin{COURSE}{Super kurs bycia grzecznym rekinem}{June 2020}{IKEA}
+\end{COURSE}
+
+\end{cvsection}
+
+\begin{cvsection}{References}
+
+\begin{REFERENCE}{Blahaj}{IKEA}{+48 123 123 123}{balahj@ikea.com}
+\end{REFERENCE}
+
+\begin{REFERENCE}{Blahaj}{IKEA}{+48 123 123 123}{balahj@ikea.com}
+\end{REFERENCE}
+
+\end{cvsection}
+
+\begin{cvsection}{Projects}
+
+\begin{PROJECT}{Bomberman}{June 2020}{Czech republic}
+\item spanko
+\item super projekcik
+\end{PROJECT}
+
+\begin{EDUCATION}{Uniwersytet Jagiellonski}{Oct 2017 - Present}{Bachelor degree}{Krakow, Poland}
+\item chce skonczyc i mam dosc tego
+\item plak plak
+\end{EDUCATION}
+
+\begin{EDUCATION}{Uniwersytet inny}{Oct 2020 - 2022}{Master degree}{Krakow, Poland}
+\item chce skonczyc i mam dosc tego
+\item plak plak jeszcze bardziej
+\end{EDUCATION}
 
 
-\newenvironment{WORK}[4]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
-  \\
-  { #3} \hfill { #4} % Italic degree and location
-  }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  }{
-  \end{list}
-  \vspace{0.5em} % Some space after the list of bullet points
-}
+\end{cvsection}
 
-\newcommand{\itemmarker}{{\small\textbullet}}
-\newcommand{\ratingmarker}{\faCircle}
+\begin{rSection}{Skills}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+English \\
+Polish \\
+Russian & Advanced \\
+Ukrainian & Native \\
+\end{tabular}
+\end{rSection}
 
-\newcommand{\cvskill}[2]{%
-\textbf{#1} \hfill
-\begin{tikzpicture}
-       \draw (1,0) circle (0.2cm);
-       \draw (2,0) circle (0.2cm);
-       \draw (3,0) circle (0.2cm);
-       \draw (4,0) circle (0.2cm);
-       \draw (5,0) circle (0.2cm);
-    \ifthenelse{\equal{#2}{1}}{
-       \fill (1,0) circle (0.1cm);}{}
-    \ifthenelse{\equal{#2}{2}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-    }{}
-    \ifthenelse{\equal{#2}{3}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
-    }{}
-    \ifthenelse{\equal{#2}{4}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
-       \fill (4,0) circle (0.1cm);
-    }{}
-    \ifthenelse{\equal{#2}{5}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
-       \fill (4,0) circle (0.1cm);
-       \fill (5,0) circle (0.1cm);
-    }{}
-\end{tikzpicture}
-}
+\begin{cvsection}{Skill}
 
-\newenvironment{cvsection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
-  }
-  \item[]
-}{
-  \end{list}
-}
+\cvskill{English}{5}
 
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\huge} % Size of the name at the top of the document
-\def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
-\def\nameskip{\bigskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section
+\cvskill{aaa}{}
+
+\cvskill{a}{1}
+\end{cvsection}
+
+\begin{cvsection}{Employment history}
+
+\begin{WORK}{Software engineer}{Oct 2019 - Present}{NOKIA}{Krakow, Poland}
+text bez item
+\textbf{BOLD} \textit{italic}
+
+akapit lorem lorem lorem ipsum dolor sit ament hjv bla bla chce frytki z sosem musztardowo miodowym i lody i pielmieni i do mamy bo jest dzien dziecka a ja jestem tez dzieckiem halo halo tu dlugi akapit i jeszcze troche
+
+
+\begin{enumerate}
+    \item balahj
+    \item to
+    \item rekin z IKEA
+\end{enumerate}
+tu będzie itemize
+\begin{itemize}
+    \item olaf
+    \item to fajny
+    \item renifer
+\end{itemize}
+\item chce skonczyc i mam dosc tego
+\item plak plak
+\end{WORK}
+
+\end{cvsection}
+
+%------------------------------------------------
+\begin{rSection}{Activities}
+
+\begin{rSubsection}{15th Academic IT Festival - SFI}{March 2019}{Volunteer}{}
+\item Helped in organization, cooperating with over 70 students from 4 different universities
+\item Created relation database for surveys and organization data (speakers, lectures, admins, rooms, etc.)  in PostgreSQL
+\end{rSubsection}
+\end{rSection}
+% \begin{rSubsection}{Computer Science Students' Association - KSI UJ}{Octber 2018 - Present}{Member}{}
+% \end{rSubsection}
+
+
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Languages}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+English &  Advanced \\
+Polish & Advanced \\
+Russian & Advanced \\
+Ukrainian & Native \\
+\end{tabular}
+\end{rSection}
+
+\begin{rSection}{Hobby}
+ Solving Algoritms \& Data Structures and Language Proficiency in Python
+
+
+\end{rSection}
+
+\end{document}
