@@ -164,8 +164,7 @@ class TemplateTest {
         setUpSkills();
     }
 
-    @Test
-    void process() {
+    public String process() {
         ArrayList<Section> sections = new ArrayList<>();
         sections.add(this.personalInformation);
         sections.add(this.education);
@@ -176,6 +175,6 @@ class TemplateTest {
         sections.add(this.links);
         sections.add(this.hobby);
         Template template = new Template(sections);
-        assertEquals("", template.process());
+        return template.process();
     }
 }
