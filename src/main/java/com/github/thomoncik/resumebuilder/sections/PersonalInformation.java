@@ -12,8 +12,6 @@ public class PersonalInformation implements Section {
         this.details = details;
     }
 
-
-
     public static class Summary {
         public String description;
     }
@@ -34,8 +32,38 @@ public class PersonalInformation implements Section {
         public String dateOfBirth;
     }
 
+    private StringBuilder processAdditionalInformation(Details details){
+        StringBuilder result = new StringBuilder();
+        result.append("\\begin{DETAILS}{")
+                .append(resolveEmpty(details.address))
+                .append("}{")
+                .append(resolveEmpty(details.city))
+                .append("}{")
+                .append(resolveEmpty(details.postalCode))
+                .append("}{")
+                .append(resolveEmpty(details.country))
+                .append("}{")
+                .append(resolveEmpty(details.phone))
+                .append("}{")
+                .append(resolveEmpty(details.email))
+                .append("}\n")
+                .append("\\end{DETAILS}\n\n");
+        return result;
+    }
+
     private String resolveEmpty(String string) {
         return string == null || string.isEmpty() || string.isBlank() ? "" : string;
+    }
+
+    private StringBuilder processName(Details details){
+        StringBuilder result = new StringBuilder();
+        result.append("\\begin{NAME}{")
+                .append(resolveEmpty(details.firstName))
+                .append("}{")
+                .append(resolveEmpty(details.lastName))
+                .append("}\n")
+                .append("\\end{NAME}\n\n");
+        return result;
     }
 
     private StringBuilder processImportantInformation(Details details){
@@ -92,7 +120,9 @@ public class PersonalInformation implements Section {
     @Override
     public StringBuilder process() {
         StringBuilder result = new StringBuilder();
+        result.append(processName(this.details));
         result.append(processImportantInformation(this.details));
+        result.append(processAdditionalInformation(this.details));
         result.append(processBirth(this.details));
         result.append(processNationality(this.details));
         result.append(processDriving(this.details));

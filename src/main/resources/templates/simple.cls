@@ -13,18 +13,18 @@
 
 \newenvironment{NAME}[2]{
      \begin{center}
-         \MakeUppercase{\huge\bf #1}  \MakeUppercase{\huge\bf #2}
+         \MakeUppercase{\huge #1}  \MakeUppercase{\huge\bf #2}
      \end{center}
 }
 
 \newenvironment{INFO}[3]{
     \begin{center}
-         { #1} \textbar \MakeUppercase{ #2} \textbar \MakeUppercase{ #3}
+         { #1} \textbar \textbar \MakeUppercase{ #2} \textbar \textbar \MakeUppercase{ #3}
     \end{center}
 }
 
 \newenvironment{SUMMARY}[1]{
-         { #1}
+         \em{ #1}
 }
 
 \newenvironment{DETAILS}[6]{
@@ -48,12 +48,12 @@
 }
 
 \newenvironment{EDUCATION}[4]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ {\bf #1} \\ {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
   \\
-  {\em #3} \hfill {\em #4} % Italic degree and location
+  {\em #3} \\ {\em #4} % Italic degree and location
   }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+  \begin{list}{}{\leftmargin=1em} % \cdot used for bullets, no indentation
    \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
   }{
   \end{list}
@@ -62,12 +62,13 @@
 
 
 \newenvironment{WORK}[4]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ {\bf #1} \\
+ {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
   \\
-  { #3} \hfill { \em #4} % Italic degree and location
+  { #3} \\ { \em #4} % Italic degree and location
   }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+  \begin{list}{}{\leftmargin=1em} % \cdot used for bullets, no indentation
    \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
   }{
   \end{list}
@@ -75,12 +76,12 @@
 }
 
 \newenvironment{ACTIVITY}[4]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ {\bf #1} \\ {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
   \\
-  { #3} \hfill { \em #4} % Italic degree and location
+  { #3} \\ { \em #4} % Italic degree and location
   }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+  \begin{list}{$\cdot$}{\leftmargin=1em} % \cdot used for bullets, no indentation
    \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
   }{
   \end{list}
@@ -110,7 +111,7 @@
 
 
 \newenvironment{CUSTOM}[3]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ {\bf #1} \\ {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
   \\
   \hspace*{\fill} {\em #3}
@@ -124,7 +125,7 @@
 }
 
 \newenvironment{COURSE}[3]{ % 4 input arguments - uni name, year(s), degree  and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+ {\bf #1} \\ {#2} % Bold company name and date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the degree and location line
   \\
   { #3} % Italic degree and location
@@ -148,37 +149,34 @@
        \draw (4,0) circle (0.2cm);
        \draw (5,0) circle (0.2cm);
     \ifthenelse{\equal{#2}{1}}{
-       \fill (1,0) circle (0.1cm);}{}
+       \fill (1,0) circle (0.2cm);}{}
     \ifthenelse{\equal{#2}{2}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
+       \fill (1,0) circle (0.2cm);
+       \fill (2,0) circle (0.2cm);
     }{}
     \ifthenelse{\equal{#2}{3}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
+       \fill (1,0) circle (0.2cm);
+       \fill (2,0) circle (0.2cm);
+       \fill (3,0) circle (0.2cm);
     }{}
     \ifthenelse{\equal{#2}{4}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
-       \fill (4,0) circle (0.1cm);
+       \fill (1,0) circle (0.2cm);
+       \fill (2,0) circle (0.2cm);
+       \fill (3,0) circle (0.2cm);
+       \fill (4,0) circle (0.2cm);
     }{}
     \ifthenelse{\equal{#2}{5}}{
-       \fill (1,0) circle (0.1cm);
-       \fill (2,0) circle (0.1cm);
-       \fill (3,0) circle (0.1cm);
-       \fill (4,0) circle (0.1cm);
-       \fill (5,0) circle (0.1cm);
+       \fill (1,0) circle (0.2cm);
+       \fill (2,0) circle (0.2cm);
+       \fill (3,0) circle (0.2cm);
+       \fill (4,0) circle (0.2cm);
+       \fill (5,0) circle (0.2cm);
     }{}
 \end{tikzpicture} \\
 }
 
 \newenvironment{cvsection}[1]{ % 1 input argument - section name
-  \medskip
-  \MakeUppercase{\bf #1} % Section title
-  \medskip
-  \hrule % Horizontal line
+ \section*{ #1}
   \begin{list}{}{ % List for each individual item in the section
     \setlength{\leftmargin}{1.5em} % Margin within the section
   }
