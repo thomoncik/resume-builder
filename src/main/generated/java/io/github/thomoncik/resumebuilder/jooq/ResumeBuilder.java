@@ -4,7 +4,9 @@
 package io.github.thomoncik.resumebuilder.jooq;
 
 
+import io.github.thomoncik.resumebuilder.jooq.tables.Role;
 import io.github.thomoncik.resumebuilder.jooq.tables.User;
+import io.github.thomoncik.resumebuilder.jooq.tables.UserRole;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +22,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ResumeBuilder extends SchemaImpl {
 
-    private static final long serialVersionUID = 1317982996;
+    private static final long serialVersionUID = -1973388882;
 
     /**
      * The reference instance of <code>RESUME_BUILDER</code>
@@ -28,9 +30,19 @@ public class ResumeBuilder extends SchemaImpl {
     public static final ResumeBuilder RESUME_BUILDER = new ResumeBuilder();
 
     /**
+     * The table <code>RESUME_BUILDER.ROLE</code>.
+     */
+    public final Role ROLE = Role.ROLE;
+
+    /**
      * The table <code>RESUME_BUILDER.USER</code>.
      */
     public final User USER = User.USER;
+
+    /**
+     * The table <code>RESUME_BUILDER.USER_ROLE</code>.
+     */
+    public final UserRole USER_ROLE = UserRole.USER_ROLE;
 
     /**
      * No further instances allowed
@@ -48,6 +60,8 @@ public class ResumeBuilder extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            User.USER);
+            Role.ROLE,
+            User.USER,
+            UserRole.USER_ROLE);
     }
 }

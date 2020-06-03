@@ -4,7 +4,9 @@
 package io.github.thomoncik.resumebuilder.jooq;
 
 
+import io.github.thomoncik.resumebuilder.jooq.tables.Role;
 import io.github.thomoncik.resumebuilder.jooq.tables.User;
+import io.github.thomoncik.resumebuilder.jooq.tables.UserRole;
 
 
 /**
@@ -14,7 +16,17 @@ import io.github.thomoncik.resumebuilder.jooq.tables.User;
 public class Tables {
 
     /**
+     * The table <code>RESUME_BUILDER.ROLE</code>.
+     */
+    public static final Role ROLE = Role.ROLE;
+
+    /**
      * The table <code>RESUME_BUILDER.USER</code>.
      */
     public static final User USER = User.USER;
+
+    /**
+     * The table <code>RESUME_BUILDER.USER_ROLE</code>.
+     */
+    public static final UserRole USER_ROLE = UserRole.USER_ROLE;
 }

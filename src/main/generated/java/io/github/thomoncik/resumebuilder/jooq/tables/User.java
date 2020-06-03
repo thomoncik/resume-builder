@@ -4,20 +4,24 @@
 package io.github.thomoncik.resumebuilder.jooq.tables;
 
 
+import io.github.thomoncik.resumebuilder.jooq.Keys;
 import io.github.thomoncik.resumebuilder.jooq.ResumeBuilder;
 import io.github.thomoncik.resumebuilder.jooq.tables.records.UserRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
@@ -28,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -2047398183;
+    private static final long serialVersionUID = -1252251451;
 
     /**
      * The reference instance of <code>RESUME_BUILDER.USER</code>
@@ -46,17 +50,37 @@ public class User extends TableImpl<UserRecord> {
     /**
      * The column <code>RESUME_BUILDER.USER.ID</code>.
      */
-    public final TableField<UserRecord, UUID> ID = createField(DSL.name("ID"), org.jooq.impl.SQLDataType.UUID.nullable(false).defaultValue(org.jooq.impl.DSL.field("RANDOM_UUID()", org.jooq.impl.SQLDataType.UUID)), this, "");
+    public final TableField<UserRecord, UUID> ID = createField(DSL.name("ID"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>RESUME_BUILDER.USER.USERNAME</code>.
+     * The column <code>RESUME_BUILDER.USER.FIRST_NAME</code>.
      */
-    public final TableField<UserRecord, String> USERNAME = createField(DSL.name("USERNAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<UserRecord, String> FIRST_NAME = createField(DSL.name("FIRST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+
+    /**
+     * The column <code>RESUME_BUILDER.USER.LAST_NAME</code>.
+     */
+    public final TableField<UserRecord, String> LAST_NAME = createField(DSL.name("LAST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+
+    /**
+     * The column <code>RESUME_BUILDER.USER.EMAIL_NAME</code>.
+     */
+    public final TableField<UserRecord, String> EMAIL_NAME = createField(DSL.name("EMAIL_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
      * The column <code>RESUME_BUILDER.USER.PASSWORD</code>.
      */
     public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("PASSWORD"), org.jooq.impl.SQLDataType.VARCHAR(256).nullable(false), this, "");
+
+    /**
+     * The column <code>RESUME_BUILDER.USER.ENABLED</code>.
+     */
+    public final TableField<UserRecord, Boolean> ENABLED = createField(DSL.name("ENABLED"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+
+    /**
+     * The column <code>RESUME_BUILDER.USER.TOKEN_EXPIRED</code>.
+     */
+    public final TableField<UserRecord, Boolean> TOKEN_EXPIRED = createField(DSL.name("TOKEN_EXPIRED"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
      * Create a <code>RESUME_BUILDER.USER</code> table reference
@@ -97,6 +121,16 @@ public class User extends TableImpl<UserRecord> {
     }
 
     @Override
+    public UniqueKey<UserRecord> getPrimaryKey() {
+        return Keys.CONSTRAINT_2;
+    }
+
+    @Override
+    public List<UniqueKey<UserRecord>> getKeys() {
+        return Arrays.<UniqueKey<UserRecord>>asList(Keys.CONSTRAINT_2, Keys.CONSTRAINT_27);
+    }
+
+    @Override
     public User as(String alias) {
         return new User(DSL.name(alias), this);
     }
@@ -123,11 +157,11 @@ public class User extends TableImpl<UserRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<UUID, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row7<UUID, String, String, String, String, Boolean, Boolean> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

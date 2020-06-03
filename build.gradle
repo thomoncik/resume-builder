@@ -51,6 +51,14 @@ jooq {
         generator {
             database {
                 inputSchema = 'RESUME_BUILDER'
+                forcedTypes {
+                    forcedType {
+                        userType = 'com.github.thomoncik.resumebuilder.model.Role'
+                        enumConverter = true
+                        includeExpression = 'ROLE.NAME'
+                        includeTypes = '.*'
+                    }
+                }
             }
             target {
                 packageName = 'io.github.thomoncik.resumebuilder.jooq'
