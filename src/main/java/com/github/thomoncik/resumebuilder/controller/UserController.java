@@ -1,9 +1,5 @@
 package com.github.thomoncik.resumebuilder.controller;
 
-//import com.hellokoding.auth.model.User;
-//import com.hellokoding.auth.service.SecurityService;
-//import com.hellokoding.auth.service.UserService;
-//import com.hellokoding.auth.validator.UserValidator;
 import com.github.thomoncik.resumebuilder.model.User;
 import com.github.thomoncik.resumebuilder.service.SecurityService;
 import com.github.thomoncik.resumebuilder.service.UserService;

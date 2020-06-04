@@ -1,7 +1,28 @@
 package com.github.thomoncik.resumebuilder.model;
 
-public enum Role {
-    ROLE_GUEST,
-    ROLE_USER,
-    ROLE_ADMIN
+import java.util.Set;
+import java.util.UUID;
+
+public class Role {
+    private final UUID id;
+    private final String name;
+    private final Set<User> users;
+
+    public Role(UUID id, String name, Set<User> users) {
+        this.id = id;
+        this.name = name;
+        this.users = users;
+    }
+
+    public UUID id() {
+        return id;
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public Set<User> users() {
+        return users;
+    }
 }

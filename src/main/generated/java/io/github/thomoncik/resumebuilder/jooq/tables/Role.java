@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Role extends TableImpl<RoleRecord> {
 
-    private static final long serialVersionUID = -185543160;
+    private static final long serialVersionUID = -59645033;
 
     /**
      * The reference instance of <code>RESUME_BUILDER.ROLE</code>
@@ -55,7 +55,7 @@ public class Role extends TableImpl<RoleRecord> {
     /**
      * The column <code>RESUME_BUILDER.ROLE.NAME</code>.
      */
-    public final TableField<RoleRecord, com.github.thomoncik.resumebuilder.model.Role> NAME = createField(DSL.name("NAME"), org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "", new org.jooq.impl.EnumConverter<java.lang.String, com.github.thomoncik.resumebuilder.model.Role>(java.lang.String.class, com.github.thomoncik.resumebuilder.model.Role.class));
+    public final TableField<RoleRecord, String> NAME = createField(DSL.name("NAME"), org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * Create a <code>RESUME_BUILDER.ROLE</code> table reference
@@ -136,7 +136,7 @@ public class Role extends TableImpl<RoleRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<UUID, com.github.thomoncik.resumebuilder.model.Role> fieldsRow() {
+    public Row2<UUID, String> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 }
