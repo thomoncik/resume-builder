@@ -2,6 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.3.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'nu.studer.jooq' version '4.2'
+    id "org.flywaydb.flyway" version "6.4.3"
 }
 
 group = 'com.github.thomoncik'
@@ -25,6 +27,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
+    jooqRuntime 'com.h2database:h2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -35,3 +38,43 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jooq {
+    configurations
+    resumeBuilder(sourceSets.main) {
+        jdbc {
+            driver = 'org.h2.Driver'
+            url = "jdbc:h2:~/resume_builder"
+            user = "sa"
+            password = "passowrd"
+        }
+        generator {
+            database {
+                inputSchema = 'RESUME_BUILDER'
+                forcedTypes {
+                    forcedType {
+                        userType = 'com.github.thomoncik.resumebuilder.model.Role'
+                        enumConverter = true
+                        includeExpression = 'ROLE.NAME'
+                        includeTypes = '.*'
+                    }
+                }
+            }
+            target {
+                packageName = 'io.github.thomoncik.resumebuilder.jooq'
+                directory = 'src/main/generated/java'
+            }
+        }
+    }
+}
+
+flyway {
+    url = "jdbc:h2:~/resume_builder"
+    user = "sa"
+    password = "passowrd"
+}
+
+generateResumeBuilderJooqSchemaSource.enabled false
+generateResumeBuilderJooqSchemaSource.dependsOn flywayMigrate
+test.dependsOn flywayClean
+
