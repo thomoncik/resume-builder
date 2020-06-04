@@ -17,7 +17,8 @@ public class JooqUserRepository implements UserRepository {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return jooq.selectFrom(USER).where(USER.EMAIL_NAME.eq(email)).fetchOne().map(r -> new User());
+    public User findByUsername(String username) {
+        var user = jooq.selectFrom(USER).where(USER.USERNAME.eq(username)).fetchOne().map(r -> new User());
+        return user;
     }
 }

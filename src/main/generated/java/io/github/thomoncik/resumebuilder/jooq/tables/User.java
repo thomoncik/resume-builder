@@ -16,7 +16,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -1252251451;
+    private static final long serialVersionUID = 108508063;
 
     /**
      * The reference instance of <code>RESUME_BUILDER.USER</code>
@@ -53,6 +53,11 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, UUID> ID = createField(DSL.name("ID"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
 
     /**
+     * The column <code>RESUME_BUILDER.USER.USERNAME</code>.
+     */
+    public final TableField<UserRecord, String> USERNAME = createField(DSL.name("USERNAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+
+    /**
      * The column <code>RESUME_BUILDER.USER.FIRST_NAME</code>.
      */
     public final TableField<UserRecord, String> FIRST_NAME = createField(DSL.name("FIRST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
@@ -63,24 +68,14 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, String> LAST_NAME = createField(DSL.name("LAST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>RESUME_BUILDER.USER.EMAIL_NAME</code>.
+     * The column <code>RESUME_BUILDER.USER.EMAIL</code>.
      */
-    public final TableField<UserRecord, String> EMAIL_NAME = createField(DSL.name("EMAIL_NAME"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<UserRecord, String> EMAIL = createField(DSL.name("EMAIL"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
      * The column <code>RESUME_BUILDER.USER.PASSWORD</code>.
      */
     public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("PASSWORD"), org.jooq.impl.SQLDataType.VARCHAR(256).nullable(false), this, "");
-
-    /**
-     * The column <code>RESUME_BUILDER.USER.ENABLED</code>.
-     */
-    public final TableField<UserRecord, Boolean> ENABLED = createField(DSL.name("ENABLED"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
-
-    /**
-     * The column <code>RESUME_BUILDER.USER.TOKEN_EXPIRED</code>.
-     */
-    public final TableField<UserRecord, Boolean> TOKEN_EXPIRED = createField(DSL.name("TOKEN_EXPIRED"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
      * Create a <code>RESUME_BUILDER.USER</code> table reference
@@ -157,11 +152,11 @@ public class User extends TableImpl<UserRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<UUID, String, String, String, String, Boolean, Boolean> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row6<UUID, String, String, String, String, String> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

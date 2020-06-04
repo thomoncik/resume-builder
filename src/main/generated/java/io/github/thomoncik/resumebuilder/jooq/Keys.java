@@ -52,7 +52,7 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<RoleRecord> CONSTRAINT_26 = Internal.createUniqueKey(Role.ROLE, "CONSTRAINT_26", new TableField[] { Role.ROLE.ID }, true);
         public static final UniqueKey<UserRecord> CONSTRAINT_2 = Internal.createUniqueKey(User.USER, "CONSTRAINT_2", new TableField[] { User.USER.ID }, true);
-        public static final UniqueKey<UserRecord> CONSTRAINT_27 = Internal.createUniqueKey(User.USER, "CONSTRAINT_27", new TableField[] { User.USER.EMAIL_NAME }, true);
+        public static final UniqueKey<UserRecord> CONSTRAINT_27 = Internal.createUniqueKey(User.USER, "CONSTRAINT_27", new TableField[] { User.USER.EMAIL }, true);
         public static final UniqueKey<UserRoleRecord> CONSTRAINT_B = Internal.createUniqueKey(UserRole.USER_ROLE, "CONSTRAINT_B", new TableField[] { UserRole.USER_ROLE.USER_ID, UserRole.USER_ROLE.ROLE_ID }, true);
     }
 

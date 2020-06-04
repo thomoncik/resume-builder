@@ -3,3 +3,9 @@ spring:
     url: jdbc:h2:~/resume_builder
     username: sa
     password: passowrd
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  messages:
+    basename: validation
