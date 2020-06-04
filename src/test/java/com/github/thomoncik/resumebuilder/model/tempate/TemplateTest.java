@@ -4,7 +4,12 @@ import com.github.thomoncik.resumebuilder.model.sections.*;
 import com.github.thomoncik.resumebuilder.model.sections.grading.GradingScale;
 import com.github.thomoncik.resumebuilder.model.sections.grading.NumberScale;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 class TemplateTest {
@@ -18,7 +23,7 @@ class TemplateTest {
     private Links links;
     private AccessibleSkills accessibleSkills;
 
-    void setUpWorkExperience(){
+    void setUpWorkExperience() {
         WorkExperience.Job toyJob = new WorkExperience.Job();
         toyJob.title = "Stuffed animal toy";
         toyJob.employer = "Julia's home";
@@ -41,7 +46,7 @@ class TemplateTest {
         this.workExperience = new WorkExperience(jobs);
     }
 
-    void setUpEducation(){
+    void setUpEducation() {
         Education.University university = new Education.University();
         university.name = "IKEA University";
         university.degree = "Bachelor degree";
@@ -56,7 +61,7 @@ class TemplateTest {
         this.education = new Education(universities);
     }
 
-    void setUpCourses(){
+    void setUpCourses() {
         Courses.Course soft = new Courses.Course();
         soft.name = "Sharks Softness Course";
         soft.institution = "IKEA";
@@ -76,7 +81,7 @@ class TemplateTest {
         this.courses = new Courses(courses);
     }
 
-    void setUpPersonalInformation(){
+    void setUpPersonalInformation() {
         PersonalInformation.Summary summary = new PersonalInformation.Summary();
         summary.description = "Big and safe to have at your side if you want to discover the world underneath the sea." +
                 " The blue shark can swim very far, dive really deep and hear your heart beating from far away.\n" +
@@ -96,11 +101,11 @@ class TemplateTest {
         this.personalInformation = new PersonalInformation(summary, details);
     }
 
-    void setUpHobby(){
+    void setUpHobby() {
         this.hobby = new Hobby("I like philosophy and sleeping");
     }
 
-    void setUpLanguages(){
+    void setUpLanguages() {
         Languages.Language english = new Languages.Language();
         english.name = "English";
         english.level = Languages.Level.A1;
@@ -120,7 +125,7 @@ class TemplateTest {
         this.languages = new Languages(languages);
     }
 
-    void setUpLinks(){
+    void setUpLinks() {
         Links.Website ikea = new Links.Website();
         ikea.label = "IKEA";
         ikea.link = "ikea.com";
@@ -132,7 +137,7 @@ class TemplateTest {
     }
 
 
-    void setUpSkills(){
+    void setUpSkills() {
         AccessibleSkills.Skill cute = new AccessibleSkills.Skill();
         cute.name = "Being cute";
         cute.level = GradingScale.Level.FIVE;
@@ -160,7 +165,8 @@ class TemplateTest {
         setUpSkills();
     }
 
-    public String process() {
+    @Test
+    void fresherResume() {
         ArrayList<Section> sections = new ArrayList<>();
         sections.add(this.personalInformation);
         sections.add(this.education);
@@ -171,6 +177,115 @@ class TemplateTest {
         sections.add(this.links);
         sections.add(this.hobby);
         Template template = new Template(sections);
-        return template.process();
+        PDFGenerator generator = new PDFGenerator();
+        generator.generate(template.process(), new File("./src/main/resources/templates/freshers.cls"));
     }
+
+    @Test
+    void fresherCover() {
+        ArrayList<Section> sections = new ArrayList<>();
+        PersonalInformation.Summary summary = new PersonalInformation.Summary();
+        summary.description = "Big and safe to have at your side if you want to discover the world underneath the sea." +
+                " The blue shark can swim very far, dive really deep and hear your heart beating from far away.\n" +
+                "I am good at hugging, comforting and listening and are fond of play and mischief. \n\n " +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae nunc dui. Aliquam erat volutpat. " +
+                "Nullam lobortis, velit in facilisis ultrices, risus sapien tincidunt sem, bibendum volutpat lacus diam non" +
+                " lectus. Proin magna orci, facilisis nec sollicitudin ut, pulvinar vitae urna. Praesent non porttitor nulla. " +
+                "Ut faucibus, lorem id pharetra varius, velit magna dignissim mi, vitae pellentesque purus est nec velit. " +
+                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam ac imperdiet felis." +
+                " Vestibulum sed turpis quis orci fringilla aliquam. Sed in dui sed erat imperdiet maximus. Duis ut quam nunc.\n" +
+                "\n" +
+                "Vivamus iaculis, lectus vel porttitor volutpat, elit dui facilisis nulla, non iaculis eros est id tortor." +
+                " Praesent dolor tellus, tristique eget libero sed, malesuada tristique lacus. Donec pulvinar augue consequat " +
+                "congue iaculis. Vestibulum in tincidunt ipsum. Sed tristique pellentesque malesuada. Etiam id sagittis est," +
+                " sit amet condimentum lorem. Vivamus suscipit velit accumsan lectus pretium hendrerit. Nulla semper feugiat" +
+                " enim. Vivamus lacinia metus ut arcu sodales laoreet.\n" +
+                "\n" +
+                "Aliquam rhoncus pretium vestibulum. Aenean non accumsan lorem. Nulla porta luctus dolor, sed interdum ligula " +
+                "dapibus eget. Etiam finibus sodales ipsum, facilisis rutrum nisl. Pellentesque ligula purus, mattis nec mi vel, " +
+                "tempor imperdiet massa. In tincidunt sodales odio, quis pretium metus. Curabitur rhoncus libero ac nisl " +
+                "fermentum feugiat. Vestibulum pulvinar felis in consectetur porta. Duis dui sem, rutrum ac pharetra vitae, " +
+                "pharetra et orci. Etiam hendrerit velit at suscipit molestie. Ut malesuada finibus fermentum. Aenean aliquam " +
+                "ante a lorem auctor aliquam. In vitae diam eget nisi feugiat egestas a vel ligula. Cras quis nisl congue," +
+                " luctus ligula vel, pharetra dolor. Vivamus aliquam libero nec rutrum imperdiet";
+
+        PersonalInformation.Details details = new PersonalInformation.Details();
+        details.firstName = "Rekin";
+        details.lastName = "Blahaj";
+        details.city = "Krakow";
+        details.jobTitle = "Blue Shark";
+        details.address = "Toy Street, 7";
+        details.country = "Poland";
+        details.postalCode = "30-404";
+        details.phone = "123 456 789";
+        details.email = "rekin.blahaj@ikea.com";
+        sections.add(new PersonalInformation(summary, details));
+
+        Template template = new Template(sections);
+        PDFGenerator generator = new PDFGenerator();
+        generator.generate(template.process(), new File("./src/main/resources/templates/freshers.cls"));
+    }
+
+    @Test
+    void simpleResume() {
+        ArrayList<Section> sections = new ArrayList<>();
+        sections.add(this.personalInformation);
+        sections.add(this.education);
+        sections.add(this.workExperience);
+        sections.add(this.courses);
+        sections.add(this.accessibleSkills);
+        sections.add(this.languages);
+        sections.add(this.links);
+        sections.add(this.hobby);
+        Template template = new Template(sections);
+        PDFGenerator generator = new PDFGenerator();
+        generator.generate(template.process(), new File("./src/main/resources/templates/simple.cls"));
+    }
+
+    @Test
+    void simpleCover() {
+        ArrayList<Section> sections = new ArrayList<>();
+        PersonalInformation.Summary summary = new PersonalInformation.Summary();
+        summary.description = "Big and safe to have at your side if you want to discover the world underneath the sea." +
+                " The blue shark can swim very far, dive really deep and hear your heart beating from far away.\n" +
+                "I am good at hugging, comforting and listening and are fond of play and mischief. \n\n " +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae nunc dui. Aliquam erat volutpat. " +
+                "Nullam lobortis, velit in facilisis ultrices, risus sapien tincidunt sem, bibendum volutpat lacus diam non" +
+                " lectus. Proin magna orci, facilisis nec sollicitudin ut, pulvinar vitae urna. Praesent non porttitor nulla. " +
+                "Ut faucibus, lorem id pharetra varius, velit magna dignissim mi, vitae pellentesque purus est nec velit. " +
+                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam ac imperdiet felis." +
+                " Vestibulum sed turpis quis orci fringilla aliquam. Sed in dui sed erat imperdiet maximus. Duis ut quam nunc.\n" +
+                "\n" +
+                "Vivamus iaculis, lectus vel porttitor volutpat, elit dui facilisis nulla, non iaculis eros est id tortor." +
+                " Praesent dolor tellus, tristique eget libero sed, malesuada tristique lacus. Donec pulvinar augue consequat " +
+                "congue iaculis. Vestibulum in tincidunt ipsum. Sed tristique pellentesque malesuada. Etiam id sagittis est," +
+                " sit amet condimentum lorem. Vivamus suscipit velit accumsan lectus pretium hendrerit. Nulla semper feugiat" +
+                " enim. Vivamus lacinia metus ut arcu sodales laoreet.\n" +
+                "\n" +
+                "Aliquam rhoncus pretium vestibulum. Aenean non accumsan lorem. Nulla porta luctus dolor, sed interdum ligula " +
+                "dapibus eget. Etiam finibus sodales ipsum, facilisis rutrum nisl. Pellentesque ligula purus, mattis nec mi vel, " +
+                "tempor imperdiet massa. In tincidunt sodales odio, quis pretium metus. Curabitur rhoncus libero ac nisl " +
+                "fermentum feugiat. Vestibulum pulvinar felis in consectetur porta. Duis dui sem, rutrum ac pharetra vitae, " +
+                "pharetra et orci. Etiam hendrerit velit at suscipit molestie. Ut malesuada finibus fermentum. Aenean aliquam " +
+                "ante a lorem auctor aliquam. In vitae diam eget nisi feugiat egestas a vel ligula. Cras quis nisl congue," +
+                " luctus ligula vel, pharetra dolor. Vivamus aliquam libero nec rutrum imperdiet";
+
+        PersonalInformation.Details details = new PersonalInformation.Details();
+        details.firstName = "Rekin";
+        details.lastName = "Blahaj";
+        details.city = "Krakow";
+        details.jobTitle = "Blue Shark";
+        details.address = "Toy Street, 7";
+        details.country = "Poland";
+        details.postalCode = "30-404";
+        details.phone = "123 456 789";
+        details.email = "rekin.blahaj@ikea.com";
+        sections.add(new PersonalInformation(summary, details));
+
+        Template template = new Template(sections);
+        PDFGenerator generator = new PDFGenerator();
+        generator.generate(template.process(), new File("./src/main/resources/templates/simple.cls"));
+    }
+
+
 }
