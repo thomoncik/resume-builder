@@ -8,19 +8,19 @@ public class Template {
 
     private final ArrayList<Section> sections;
 
-    public Template(ArrayList<Section> sections){
+    public Template(ArrayList<Section> sections) {
         this.sections = sections;
     }
 
-    public String process(){
+    public String process() {
         StringBuilder result = new StringBuilder();
         result.append("\\documentclass{resume}\n\n\\begin{document}\n\n");
-        for (Section section: sections){
-            result.append(section.process());
+        if (sections != null) {
+            for (Section section : sections) {
+                result.append(section.process());
+            }
         }
         result.append("\\end{document}\n");
         return result.toString();
     }
-
-
 }
