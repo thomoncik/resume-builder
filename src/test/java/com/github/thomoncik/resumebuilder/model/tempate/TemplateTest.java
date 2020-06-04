@@ -4,7 +4,12 @@ import com.github.thomoncik.resumebuilder.model.sections.*;
 import com.github.thomoncik.resumebuilder.model.sections.grading.GradingScale;
 import com.github.thomoncik.resumebuilder.model.sections.grading.NumberScale;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 class TemplateTest {
@@ -160,7 +165,8 @@ class TemplateTest {
         setUpSkills();
     }
 
-    public String process() {
+    @Test
+    void process() {
         ArrayList<Section> sections = new ArrayList<>();
         sections.add(this.personalInformation);
         sections.add(this.education);
@@ -171,6 +177,7 @@ class TemplateTest {
         sections.add(this.links);
         sections.add(this.hobby);
         Template template = new Template(sections);
-        return template.process();
+        PDFGenerator generator = new PDFGenerator();
+        generator.generate(template.process(), new File("./src/main/resources/templates/freshers.cls"));
     }
 }
