@@ -10,8 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PDFGenerator {
-
-
     void writeFile(String result, String where) {
         File file = new File(where);
         try {

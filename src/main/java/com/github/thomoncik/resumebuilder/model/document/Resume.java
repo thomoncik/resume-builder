@@ -1,17 +1,17 @@
-package com.github.thomoncik.resumebuilder.model.tempate;
+package com.github.thomoncik.resumebuilder.model.document;
 
 import com.github.thomoncik.resumebuilder.model.sections.Section;
 
 import java.util.ArrayList;
 
-public class Template {
-
+public class Resume implements Document {
     private final ArrayList<Section> sections;
 
-    public Template(ArrayList<Section> sections) {
+    public Resume(ArrayList<Section> sections) {
         this.sections = sections;
     }
 
+    @Override
     public String process() {
         StringBuilder result = new StringBuilder();
         result.append("\\documentclass{resume}\n\n\\begin{document}\n\n");

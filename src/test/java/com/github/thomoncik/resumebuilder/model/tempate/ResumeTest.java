@@ -1,5 +1,6 @@
 package com.github.thomoncik.resumebuilder.model.tempate;
 
+import com.github.thomoncik.resumebuilder.model.document.Resume;
 import com.github.thomoncik.resumebuilder.model.sections.*;
 import com.github.thomoncik.resumebuilder.model.sections.grading.GradingScale;
 import com.github.thomoncik.resumebuilder.model.sections.grading.NumberScale;
@@ -7,12 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-class TemplateTest {
+class ResumeTest {
 
     private WorkExperience workExperience;
     private Education education;
@@ -176,9 +174,9 @@ class TemplateTest {
         sections.add(this.languages);
         sections.add(this.links);
         sections.add(this.hobby);
-        Template template = new Template(sections);
+        Resume resume = new Resume(sections);
         PDFGenerator generator = new PDFGenerator();
-        generator.generate(template.process(), new File("./src/main/resources/templates/freshers.cls"));
+        generator.generate(resume.process(), new File("./src/main/resources/templates/freshers.cls"));
     }
 
     @Test
@@ -221,9 +219,9 @@ class TemplateTest {
         details.email = "rekin.blahaj@ikea.com";
         sections.add(new PersonalInformation(summary, details));
 
-        Template template = new Template(sections);
+        Resume resume = new Resume(sections);
         PDFGenerator generator = new PDFGenerator();
-        generator.generate(template.process(), new File("./src/main/resources/templates/freshers.cls"));
+        generator.generate(resume.process(), new File("./src/main/resources/templates/freshers.cls"));
     }
 
     @Test
@@ -237,9 +235,9 @@ class TemplateTest {
         sections.add(this.languages);
         sections.add(this.links);
         sections.add(this.hobby);
-        Template template = new Template(sections);
+        Resume resume = new Resume(sections);
         PDFGenerator generator = new PDFGenerator();
-        generator.generate(template.process(), new File("./src/main/resources/templates/simple.cls"));
+        generator.generate(resume.process(), new File("./src/main/resources/templates/simple.cls"));
     }
 
     @Test
@@ -282,9 +280,9 @@ class TemplateTest {
         details.email = "rekin.blahaj@ikea.com";
         sections.add(new PersonalInformation(summary, details));
 
-        Template template = new Template(sections);
+        Resume resume = new Resume(sections);
         PDFGenerator generator = new PDFGenerator();
-        generator.generate(template.process(), new File("./src/main/resources/templates/simple.cls"));
+        generator.generate(resume.process(), new File("./src/main/resources/templates/simple.cls"));
     }
 
 
