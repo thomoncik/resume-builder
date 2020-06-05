@@ -66,6 +66,4 @@ public class Custom implements Section {
         result.append("\\end{CUSTOM}\n\n");
         return result;
     }
-
-    // TODO this is copy of project
 }

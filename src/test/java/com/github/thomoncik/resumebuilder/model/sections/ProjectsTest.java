@@ -19,6 +19,4 @@ class ProjectsTest {
         Projects projects = new Projects(new ArrayList<>());
         assertNull(projects.process());
     }
-
-    //TODO more tests
 }

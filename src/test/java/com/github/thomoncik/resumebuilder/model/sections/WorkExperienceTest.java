@@ -101,8 +101,4 @@ class WorkExperienceTest {
     private String ending(){
         return "\\end{cvsection}\n\n";
     }
-
-    // TODO add more
-    // TODO add separate string parser
-
 }

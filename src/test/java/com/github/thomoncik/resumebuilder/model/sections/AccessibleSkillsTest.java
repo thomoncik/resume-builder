@@ -139,7 +139,4 @@ class AccessibleSkillsTest {
     private String ending() {
         return "\\end{cvsection}\n\n";
     }
-
-    // TODO split on different scales
-    // TODO refactor this
 }

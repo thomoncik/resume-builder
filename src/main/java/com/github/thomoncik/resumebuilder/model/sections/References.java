@@ -15,7 +15,7 @@ public class References implements Section {
         public String name;
         public String company;
         public String phone;
-        public String email; // TODO add mailto
+        public String email;
     }
     @Override
     public StringBuilder process() {

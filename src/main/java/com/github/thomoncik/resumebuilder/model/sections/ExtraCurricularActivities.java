@@ -64,6 +64,4 @@ public class ExtraCurricularActivities implements Section {
         result.append("\\end{ACTIVITY}\n\n");
         return result;
     }
-
-    // TODO this is the same as work
 }

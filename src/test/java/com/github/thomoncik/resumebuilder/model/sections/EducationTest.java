@@ -39,6 +39,4 @@ class EducationTest {
     private String ending(){
         return "\\end{cvsection}\n\n";
     }
-    // TODO add more
-
 }
